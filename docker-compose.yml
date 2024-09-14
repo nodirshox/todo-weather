@@ -1,0 +1,25 @@
+version: "3.1"
+
+services:
+  backend:
+    container_name: todo-backend
+    restart: always
+    build: ./
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - WEATHER_API=${WEATHER_API}
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo:4.2
+    container_name: todo-mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=task
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - "27017:27017"
