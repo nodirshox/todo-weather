@@ -7,7 +7,7 @@ import { TasksRepository } from '@tasks/tasks.repository';
 import { CreateTaskDto } from '@tasks/dto/create-task.dto';
 import { UpdateTaskDto } from '@tasks/dto/update-task.dto';
 import { WeatherService } from '@weather/weather.service';
-import { TaskTransform } from './tasks.transform';
+import { TaskTransform } from '@tasks/tasks.transform';
 
 @Injectable()
 export class TasksService {

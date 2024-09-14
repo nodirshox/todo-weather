@@ -85,7 +85,9 @@
       "^@/(.*)$": "<rootDir>/$1",
       "@const/(.*)": "<rootDir>/const/$1",
       "@schemas/(.*)": "<rootDir>/schemas/$1",
-      "@users/(.*)": "<rootDir>/modules/users/$1"
+      "@users/(.*)": "<rootDir>/modules/users/$1",
+      "@tasks/(.*)": "<rootDir>/modules/tasks/$1",
+      "@weather/(.*)": "<rootDir>/modules/weather/$1"
     }
   }
 }
