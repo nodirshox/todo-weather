@@ -12,6 +12,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
+      "@schemas/*": ["./schemas/*"],
+      "@const/*": ["./const/*"],
       "@users/*": ["./modules/users/*"],
     },
     "incremental": true,
