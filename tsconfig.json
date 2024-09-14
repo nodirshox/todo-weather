@@ -15,6 +15,7 @@
       "@schemas/*": ["./schemas/*"],
       "@const/*": ["./const/*"],
       "@users/*": ["./modules/users/*"],
+      "@tasks/*": ["./modules/tasks/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

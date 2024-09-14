@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtPayloadDto } from '@users/dto/jwt-payload.dto';
 import { UsersRepository } from '@users/users.repository';
+import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -22,3 +23,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return user;
   }
 }
+
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') {}
