@@ -7,6 +7,7 @@ import { TasksRepository } from '@tasks/tasks.repository';
 import { CreateTaskDto } from '@tasks/dto/create-task.dto';
 import { UpdateTaskDto } from '@tasks/dto/update-task.dto';
 import { WeatherService } from '@weather/weather.service';
+import { TaskTransform } from './tasks.transform';
 
 @Injectable()
 export class TasksService {
@@ -25,18 +26,7 @@ export class TasksService {
     const tasks = await this.repository.getTasks(userId);
 
     return {
-      tasks: tasks.map((task) => {
-        return {
-          id: task.id,
-          title: task.title,
-          description: task.description,
-          completed: task.completed,
-          weather: {
-            temperature: task.weather.temperature,
-            condition: task.weather.condition,
-          },
-        };
-      }),
+      tasks: tasks.map(TaskTransform.transformTask),
     };
   }
 
@@ -51,16 +41,7 @@ export class TasksService {
       throw new ForbiddenException('Task belongs to other user');
     }
 
-    return {
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      completed: task.completed,
-      weather: {
-        temperature: task.weather.temperature,
-        condition: task.weather.condition,
-      },
-    };
+    return TaskTransform.transformTask(task);
   }
 
   async updateTask(userId: string, taskId: string, body: UpdateTaskDto) {
