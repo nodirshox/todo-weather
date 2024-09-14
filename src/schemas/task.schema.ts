@@ -27,6 +27,9 @@ export class Task {
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   userId: string;
+
+  @Prop({ type: Weather, required: true })
+  weather: Weather;
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task);

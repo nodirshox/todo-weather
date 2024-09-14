@@ -16,6 +16,7 @@
       "@const/*": ["./const/*"],
       "@users/*": ["./modules/users/*"],
       "@tasks/*": ["./modules/tasks/*"],
+      "@weather/*": ["./modules/weather/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

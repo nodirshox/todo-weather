@@ -6,25 +6,35 @@ import {
 import { TasksRepository } from '@tasks/tasks.repository';
 import { CreateTaskDto } from '@tasks/dto/create-task.dto';
 import { UpdateTaskDto } from '@tasks/dto/update-task.dto';
+import { WeatherService } from '@weather/weather.service';
 
 @Injectable()
 export class TasksService {
-  constructor(private readonly repository: TasksRepository) {}
+  constructor(
+    private readonly repository: TasksRepository,
+    private readonly weatherService: WeatherService,
+  ) {}
 
   async createTask(userId: string, body: CreateTaskDto) {
-    return this.repository.createTask(userId, body);
+    const weather = await this.weatherService.fetchWeather();
+    await this.repository.createTask(userId, body, weather);
+    return { message: 'Task created successfully' };
   }
 
   async getTasks(userId: string) {
     const tasks = await this.repository.getTasks(userId);
 
     return {
-      tasks: tasks.map((t) => {
+      tasks: tasks.map((task) => {
         return {
-          id: t.id,
-          title: t.title,
-          description: t.description,
-          completed: t.completed,
+          id: task.id,
+          title: task.title,
+          description: task.description,
+          completed: task.completed,
+          weather: {
+            temperature: task.weather.temperature,
+            condition: task.weather.condition,
+          },
         };
       }),
     };
@@ -46,13 +56,18 @@ export class TasksService {
       title: task.title,
       description: task.description,
       completed: task.completed,
+      weather: {
+        temperature: task.weather.temperature,
+        condition: task.weather.condition,
+      },
     };
   }
 
   async updateTask(userId: string, taskId: string, body: UpdateTaskDto) {
     await this.getTask(userId, taskId);
 
-    await this.repository.updateTask(taskId, body);
+    const weather = await this.weatherService.fetchWeather();
+    await this.repository.updateTask(taskId, body, weather);
 
     return { message: 'Task updated successfully' };
   }
