@@ -22,6 +22,10 @@ export class TasksRepository {
     return this.TaskModel.find({ userId });
   }
 
+  getAllTasks(): Promise<Task[]> {
+    return this.TaskModel.find();
+  }
+
   getTask(id: string): Promise<Task> {
     return this.TaskModel.findOne({ id });
   }

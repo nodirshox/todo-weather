@@ -30,6 +30,14 @@ export class TasksService {
     };
   }
 
+  async getAllTasks() {
+    const tasks = await this.repository.getAllTasks();
+
+    return {
+      tasks: tasks.map(TaskTransform.transformTask),
+    };
+  }
+
   async getTask(userId: string, taskId: string) {
     const task = await this.repository.getTask(taskId);
 
