@@ -16,10 +16,10 @@ Deployment: Docker
 
 Pipeline: Github Actions
 
-[Swagger](https://api.task.nodirbek.uz/api)
+Swagger
 
 ```
-https://api.task.nodirbek.uz/api
+http://localhost:3000/api
 ```
 
 ## Sample user
